@@ -1,6 +1,6 @@
 {
   "name": "purescript-sec",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Semantic Editor Combinators for PureScript.",
   "license": "MIT",
   "devDependencies": {
