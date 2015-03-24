@@ -1,0 +1,12 @@
+{
+  "name": "purescript-sec",
+  "version": "0.0.0",
+  "description": "Semantic Editor Combinators for PureScript.",
+  "license": "MIT",
+  "dependencies": {
+    "purescript-arrays": "~0.3.5",
+    "purescript-maybe": "~0.2.2",
+    "purescript-profunctor": "~0.2.1",
+    "purescript-foldable-traversable": "~0.3.1"
+  }
+}

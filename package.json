@@ -1,0 +1,15 @@
+{
+  "name": "purescript-sec",
+  "version": "0.0.0",
+  "description": "Semantic Editor Combinators for PureScript.",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-bump": "^0.3.0",
+    "gulp-filter": "^2.0.2",
+    "gulp-git": "^1.1.0",
+    "gulp-purescript": "^0.1.2",
+    "gulp-tag-version": "^1.2.1",
+    "run-sequence": "^1.0.2"
+  }
+}
