@@ -1,21 +1,33 @@
 -- | Provides monomorphic versions of functions for a nice DSL.
+-- | The majority of these functions are just `(<$>)`.
+-- |
+-- | The idea here is that you can traverse into a data structure and
+-- | modify some piece of it.
+-- | This library is like a much more simplistic version of `purescript-lens`.
 module Data.SEC where
 
-  import           Data.Array (length, nub, snoc)
-  import           Data.Either (Either())
-  import           Data.Foldable (foldl)
-  import           Data.Maybe (Maybe(..))
-  import           Data.Tuple (Tuple())
+  import           Data.Array                (length, nub, snoc)
+  import           Data.Either               (Either())
+  import           Data.Foldable             (foldl)
+  import           Data.Maybe                (Maybe(..))
+  import           Data.Tuple                (Tuple())
 
   import qualified Data.Profunctor        as P
   import qualified Data.Profunctor.Choice as P
   import qualified Data.Profunctor.Strong as P
 
-  argument :: forall a b c. (a -> b) -> (b -> c) -> (a -> c)
-  argument = (>>>)
+  infixr 9 ..
+  (..) :: forall a b c. (b -> c) -> (a -> b) -> (a -> c)
+  (..) = (<$>)
 
-  both :: forall a b c d. (a -> c) -> (b -> d) -> Tuple a b -> Tuple c d
-  both = P.(***)
+  andAlso :: forall a b c d. (a -> c) -> (b -> d) -> Tuple a b -> Tuple c d
+  andAlso = P.(***)
+
+  argument :: forall a b c. (a -> b) -> (b -> c) -> (a -> c)
+  argument = (<#>)
+
+  connect :: forall a b c. (a -> c) -> (b -> c) -> Either a b -> c
+  connect = P.(|||)
 
   elements :: forall a b. (a -> b) -> [a] -> [b]
   elements = (<$>)
@@ -45,8 +57,11 @@ module Data.SEC where
   just :: forall a b. (a -> b) -> Maybe a -> Maybe b
   just = (<$>)
 
+  orElse :: forall a b c d. (a -> c) -> (b -> d) -> Either a b -> Either c d
+  orElse = P.(+++)
+
   result :: forall a b c. (b -> c) -> (a -> b) -> (a -> c)
-  result = (<<<)
+  result = (<$>)
 
   right :: forall a b c. (a -> b) -> Either c a -> Either c b
   right = P.right
@@ -56,3 +71,6 @@ module Data.SEC where
 
   set :: forall a b. a -> b -> a
   set = const
+
+  split :: forall a b c. (a -> b) -> (a -> c) -> a -> Tuple b c
+  split = P.(&&&)

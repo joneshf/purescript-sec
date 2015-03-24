@@ -4,6 +4,25 @@
 
 
 Provides monomorphic versions of functions for a nice DSL.
+The majority of these functions are just `(<$>)`.
+
+The idea here is that you can traverse into a data structure and
+modify some piece of it.
+This library is like a much more simplistic version of `purescript-lens`.
+
+#### `(..)`
+
+``` purescript
+(..) :: forall a b c. (b -> c) -> (a -> b) -> a -> c
+```
+
+
+#### `andAlso`
+
+``` purescript
+andAlso :: forall a b c d. (a -> c) -> (b -> d) -> Tuple a b -> Tuple c d
+```
+
 
 #### `argument`
 
@@ -12,10 +31,10 @@ argument :: forall a b c. (a -> b) -> (b -> c) -> a -> c
 ```
 
 
-#### `both`
+#### `connect`
 
 ``` purescript
-both :: forall a b c d. (a -> c) -> (b -> d) -> Tuple a b -> Tuple c d
+connect :: forall a b c. (a -> c) -> (b -> c) -> Either a b -> c
 ```
 
 
@@ -75,6 +94,13 @@ just :: forall a b. (a -> b) -> Maybe a -> Maybe b
 ```
 
 
+#### `orElse`
+
+``` purescript
+orElse :: forall a b c d. (a -> c) -> (b -> d) -> Either a b -> Either c d
+```
+
+
 #### `result`
 
 ``` purescript
@@ -100,6 +126,13 @@ second :: forall a b c. (a -> b) -> Tuple c a -> Tuple c b
 
 ``` purescript
 set :: forall a b. a -> b -> a
+```
+
+
+#### `split`
+
+``` purescript
+split :: forall a b c. (a -> b) -> (a -> c) -> a -> Tuple b c
 ```
 
 
